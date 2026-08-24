@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerard Morina — Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0c0a;
+    --bg2: #161411;
+    --bg3: #1e1b17;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f0e8d8;
+    --cream-dim: #b8aa94;
+    --rust: #9c4a2b;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --title: 'Cinzel', serif;
+    --sans: 'Lato', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--serif);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem 6rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(156, 74, 43, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(201, 168, 76, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-ornament {
+    font-family: var(--title);
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--title);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    line-height: 0.9;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+
+  .hero-name span {
+    display: block;
+    color: var(--gold);
+  }
+
+  .hero-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--cream-dim);
+    font-weight: 300;
+    max-width: 500px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+
+  .scroll-indicator span {
+    font-family: var(--title);
+    font-size: 0.55rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 12, 10, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 1rem;
+  }
+
+  .tab-btn {
+    font-family: var(--title);
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 1.4rem 2rem;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .tab-btn:hover { color: var(--cream); }
+  .tab-btn:hover::after { transform: scaleX(0.5); }
+
+  .tab-btn.active {
+    color: var(--gold);
+  }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-area { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: panelIn 0.5s ease forwards; }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-intro {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--cream-dim);
+    letter-spacing: 0.05em;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .gold-rule {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  /* ── PLAYS GRID ── */
+  .plays-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  .play-card {
+    background: var(--bg2);
+    padding: 2.5rem;
+    border: 1px solid rgba(201, 168, 76, 0.08);
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .play-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+
+  .play-card:hover { background: var(--bg3); border-color: rgba(201, 168, 76, 0.2); }
+  .play-card:hover::before { height: 100%; }
+
+  .play-year {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .play-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .play-meta {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .play-desc {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .play-award {
+    margin-top: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+
+  .award-star { font-size: 0.8rem; }
+
+  /* ── SONGS ── */
+  .songs-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .songs-layout { grid-template-columns: 1fr; }
+    .tab-btn { padding: 1.2rem 1rem; font-size: 0.55rem; letter-spacing: 0.2em; }
+  }
+
+  .album-art {
+    aspect-ratio: 1;
+    background: var(--bg3);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .album-art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+  }
+
+  .album-inner {
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .album-center {
+    width: 30%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+
+  .album-rings {
+    position: absolute;
+    inset: -20%;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.08);
+  }
+
+  .album-label {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .album-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--cream-dim);
+  }
+
+  .tracklist { list-style: none; }
+
+  .track {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .track:hover { padding-left: 0.5rem; border-color: rgba(201, 168, 76, 0.2); }
+  .track:hover .track-num { color: var(--gold); }
+  .track:hover .track-title { color: var(--cream); }
+
+  .track-num {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(201, 168, 76, 0.4);
+    text-align: right;
+    transition: color 0.3s;
+  }
+
+  .track-info { }
+
+  .track-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--cream-dim);
+    font-style: italic;
+    transition: color 0.3s;
+  }
+
+  .track-from {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(201, 168, 76, 0.5);
+    margin-top: 0.15rem;
+  }
+
+  .track-dur {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: rgba(201, 168, 76, 0.35);
+  }
+
+  /* ── WRITINGS ── */
+  .writings-list { max-width: 720px; margin: 0 auto; }
+
+  .writing-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .writing-item:first-child { border-top: 1px solid rgba(201, 168, 76, 0.1); }
+
+  .writing-item:hover { padding-left: 0.5rem; }
+  .writing-item:hover .writing-year { color: var(--gold-light); }
+
+  .writing-year {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    align-self: center;
+    transition: color 0.3s;
+  }
+
+  .writing-content { }
+
+  .writing-type {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.6);
+    margin-bottom: 0.6rem;
+  }
+
+  .writing-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 0.7rem;
+    line-height: 1.2;
+  }
+
+  .writing-excerpt {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--cream-dim);
+    line-height: 1.9;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .writing-pub {
+    margin-top: 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: rgba(201, 168, 76, 0.5);
+  }
+
+  /* ── OTHER WORKS ── */
+  .other-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .other-card {
+    background: var(--bg2);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+
+  .other-card:hover { border-color: rgba(201, 168, 76, 0.3); transform: translateY(-4px); }
+
+  .card-visual {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to top, var(--bg2), transparent);
+  }
+
+  .visual-film { background: linear-gradient(135deg, #1a0f0a 0%, #2d1810 50%, #1a0f0a 100%); }
+  .visual-photo { background: linear-gradient(135deg, #080d16 0%, #0f1f30 50%, #080d16 100%); }
+  .visual-collab { background: linear-gradient(135deg, #0a110a 0%, #162016 50%, #0a110a 100%); }
+  .visual-score { background: linear-gradient(135deg, #12100a 0%, #221d0e 50%, #12100a 100%); }
+
+  .visual-icon {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.3));
+  }
+
+  .card-body { padding: 1.5rem; }
+
+  .card-category {
+    font-family: var(--title);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: var(--cream-dim);
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER / CONTACT ── */
+  .site-footer {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-name {
+    font-family: var(--title);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--cream-dim);
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    font-family: var(--title);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    color: rgba(201, 168, 76, 0.5);
+    transition: color 0.3s;
+  }
+
+  .footer-link:hover { color: var(--gold); }
+
+  .footer-copy {
+    margin-top: 3rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(201, 168, 76, 0.2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-ornament">Playwright · Songwriter · Author</p>
+  <h1 class="hero-name">
+    Gerard
+    <span>Morina</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-subtitle" style="opacity:0;animation:fadeUp 1s 1s forwards;">All works created and imagined by Gerard Morina for your entertainment. Please see contact section to get in touch.</p>
+  <div class="scroll-indicator">
+    <span>Works</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- STICKY TAB NAV -->
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" role="tab" data-target="writings" aria-selected="true">Writings</button>
+  <button class="tab-btn" role="tab" data-target="songs" aria-selected="false">Songs</button>
+  <button class="tab-btn" role="tab" data-target="plays" aria-selected="false">Plays</button>
+  <button class="tab-btn" role="tab" data-target="other" aria-selected="false">Other Works</button>
+</nav>
+
+<!-- CONTENT -->
+<main>
+  <div class="content-area">
+
+    <!-- PLAYS -->
+    <section id="plays" class="tab-panel" role="tabpanel">
+      <div class="section-header">
+        <span class="section-label">For the Stage</span>
+        <h2 class="section-title">Plays</h2>
+        <div class="gold-rule"></div>
+        <p class="section-intro">Works produced off-Broadway — each world built for the stage.</p>
+      </div>
+
+      <div class="plays-grid">
+        <div class="play-card">
+          <div class="play-year">2023</div>
+          <h3 class="play-title">The Cartography of Loss</h3>
+          <div class="play-meta">3 Acts · Drama</div>
+          <p class="play-desc">A widow maps her grief through the literal streets of the city she and her husband walked together over forty years.</p>
+          <div class="play-award"><span class="award-star">✦</span> Obie Award, Best New Play</div>
+        </div>
+
+        <div class="play-card">
+          <div class="play-year">2021</div>
+          <h3 class="play-title">Meridian</h3>
+          <div class="play-meta">2 Acts · Tragicomedy</div>
+          <p class="play-desc">Three strangers meet at the same intersection every Thursday. None of them can explain why they keep returning.</p>
+          <div class="play-award"><span class="award-star">✦</span> Drama Desk Nomination</div>
+        </div>
+
+        <div class="play-card">
+          <div class="play-year">2019</div>
+          <h3 class="play-title">All the Rooms You've Slept In</h3>
+          <div class="play-meta">1 Act · Monologue</div>
+          <p class="play-desc">A solo performance tracing a woman's entire life through the beds she has slept in, feared, and loved within.</p>
+        </div>
+
+        <div class="play-card">
+          <div class="play-year">2017</div>
+          <h3 class="play-title">Salt Flat</h3>
+          <div class="play-meta">2 Acts · Drama</div>
+          <p class="play-desc">On a vast salt flat in Nevada, two estranged brothers wait for a storm that may never arrive.</p>
+          <div class="play-award"><span class="award-star">✦</span> Sundance Theatre Lab · World Premiere</div>
+        </div>
+
+        <div class="play-card">
+          <div class="play-year">2015</div>
+          <h3 class="play-title">The Understudy's Lament</h3>
+          <div class="play-meta">3 Acts · Dark Comedy</div>
+          <p class="play-desc">A woman who has spent twenty years never going on stage wonders if her real life was the performance all along.</p>
+        </div>
+
+        <div class="play-card">
+          <div class="play-year">2012</div>
+          <h3 class="play-title">Half-Light</h3>
+          <div class="play-meta">1 Act · Chamber Piece</div>
+          <p class="play-desc">Written for five actors and no set. The stage is bare. The only props are words.</p>
+          <div class="play-award"><span class="award-star">✦</span> Edinburgh Festival Fringe · Best New Work</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SONGS -->
+    <section id="songs" class="tab-panel" role="tabpanel">
+      <div class="section-header">
+        <span class="section-label">For the Ear</span>
+        <h2 class="section-title">Songs</h2>
+        <div class="gold-rule"></div>
+        <p class="section-intro">Music written, performed and recorded by Gerard Morina.</p>
+      </div>
+
+      <div class="songs-layout">
+        <div>
+          <div class="album-art">
+            <div class="album-inner">
+              <div class="album-rings"></div>
+              <div class="album-rings" style="inset: -35%;"></div>
+              <div class="album-center"></div>
+            </div>
+          </div>
+          <div class="album-label">
+            <p class="album-name">Selected Works, 2014–2024</p>
+          </div>
+        </div>
+
+        <div>
+          <ul class="tracklist">
+            <li class="track">
+              <span class="track-num">01</span>
+              <div class="track-info">
+                <div class="track-title">Tender Machinery</div>
+                <div class="track-from">from Salt Flat (2017)</div>
+              </div>
+              <span class="track-dur">4:12</span>
+            </li>
+            <li class="track">
+              <span class="track-num">02</span>
+              <div class="track-info">
+                <div class="track-title">What the Lake Knows</div>
+                <div class="track-from">Original (2022)</div>
+              </div>
+              <span class="track-dur">3:47</span>
+            </li>
+            <li class="track">
+              <span class="track-num">03</span>
+              <div class="track-info">
+                <div class="track-title">The Cartographer's Wife</div>
+                <div class="track-from">from The Cartography of Loss (2023)</div>
+              </div>
+              <span class="track-dur">5:33</span>
+            </li>
+            <li class="track">
+              <span class="track-num">04</span>
+              <div class="track-info">
+                <div class="track-title">Rooms</div>
+                <div class="track-from">from All the Rooms… (2019)</div>
+              </div>
+              <span class="track-dur">2:58</span>
+            </li>
+            <li class="track">
+              <span class="track-num">05</span>
+              <div class="track-info">
+                <div class="track-title">No Signal</div>
+                <div class="track-from">Film score, Dusk at the Edge (2020)</div>
+              </div>
+              <span class="track-dur">6:10</span>
+            </li>
+            <li class="track">
+              <span class="track-num">06</span>
+              <div class="track-info">
+                <div class="track-title">Meridian (Reprise)</div>
+                <div class="track-from">from Meridian (2021)</div>
+              </div>
+              <span class="track-dur">3:22</span>
+            </li>
+            <li class="track">
+              <span class="track-num">07</span>
+              <div class="track-info">
+                <div class="track-title">Half-Light (Instrumental)</div>
+                <div class="track-from">Original / Live (2014)</div>
+              </div>
+              <span class="track-dur">7:04</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITINGS -->
+    <section id="writings" class="tab-panel active" role="tabpanel">
+      <div class="section-header">
+        <span class="section-label">For the Page</span>
+        <h2 class="section-title">Writings</h2>
+        <div class="gold-rule"></div>
+        <p class="section-intro">Essays, stories and other tales waiting to be published over two decades.</p>
+      </div>
+
+      <div class="writings-list">
+        <article class="writing-item">
+          <div class="writing-year">2024</div>
+          <div class="writing-content">
+            <div class="writing-type">Essay Collection</div>
+            <h3 class="writing-title">The Architecture of Forgetting</h3>
+            <p class="writing-excerpt">Twelve essays on grief, geography, and the unreliable nature of memory — what the mind keeps and what it quietly dismantles over time.</p>
+            <p class="writing-pub">Farrar, Straus &amp; Giroux · 2024</p>
+          </div>
+        </article>
+
+        <article class="writing-item">
+          <div class="writing-year">2022</div>
+          <div class="writing-content">
+            <div class="writing-type">Novel</div>
+            <h3 class="writing-title">Every Third Winter</h3>
+            <p class="writing-excerpt">A woman returns to the northern town where she was born every three years, measuring herself against what has stayed and what has changed.</p>
+            <p class="writing-pub">Penguin Press · 2022 · Longlisted, Women's Prize</p>
+          </div>
+        </article>
+
+        <article class="writing-item">
+          <div class="writing-year">2020</div>
+          <div class="writing-content">
+            <div class="writing-type">Short Fiction</div>
+            <h3 class="writing-title">The Light in August Is Different</h3>
+            <p class="writing-excerpt">A story about two sisters who communicate only through photographs left in each other's mailboxes, never meeting face to face.</p>
+            <p class="writing-pub">The New Yorker · August 2020</p>
+          </div>
+        </article>
+
+        <article class="writing-item">
+          <div class="writing-year">2018</div>
+          <div class="writing-content">
+            <div class="writing-type">Poetry Chapbook</div>
+            <h3 class="writing-title">Distances Named After People</h3>
+            <p class="writing-excerpt">Thirty-one poems, each measuring the space between the speaker and someone she has loved or lost or almost known.</p>
+            <p class="writing-pub">Graywolf Press · 2018</p>
+          </div>
+        </article>
+
+        <article class="writing-item">
+          <div class="writing-year">2015</div>
+          <div class="writing-content">
+            <div class="writing-type">Essay</div>
+            <h3 class="writing-title">On Silence as a Stage Direction</h3>
+            <p class="writing-excerpt">A meditation on what playwrights mean when they ask for silence — and how audiences fill it with their own private grief.</p>
+            <p class="writing-pub">The Paris Review · Issue 212 · 2015</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- OTHER WORKS -->
+    <section id="other" class="tab-panel" role="tabpanel">
+      <div class="section-header">
+        <span class="section-label">Beyond Category</span>
+        <h2 class="section-title">Other Works</h2>
+        <div class="gold-rule"></div>
+        <p class="section-intro">Projects created for entertainment and enjoyment.</p>
+      </div>
+
+      <div class="other-grid">
+        <div class="other-card">
+          <div class="card-visual visual-film">
+            <span class="visual-icon">◈</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Film</div>
+            <h3 class="card-title">Dusk at the Edge</h3>
+            <p class="card-desc">Original score and screenplay contributor for director Halima Osei's debut feature. Selected, Tribeca 2020.</p>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <div class="card-visual visual-photo">
+            <span class="visual-icon">◉</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Photography</div>
+            <h3 class="card-title">Still Lifes for Moving People</h3>
+            <p class="card-desc">A series of 40 photographs taken in waiting rooms across twelve countries over five years. Exhibited at ICP New York, 2021.</p>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <div class="card-visual visual-collab">
+            <span class="visual-icon">◍</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Collaboration</div>
+            <h3 class="card-title">Letters to No One</h3>
+            <p class="card-desc">A live performance and book co-created with choreographer Yuki Tanaka. Text, movement, silence, in equal measure.</p>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <div class="card-visual visual-score">
+            <span class="visual-icon">♩</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Orchestral Score</div>
+            <h3 class="card-title">Suite for an Empty House</h3>
+            <p class="card-desc">Commissioned by the Brooklyn Philharmonic. Premiered October 2023. For chamber ensemble and the sounds of an old building.</p>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <div class="card-visual visual-film">
+            <span class="visual-icon">▣</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Installation</div>
+            <h3 class="card-title">The Topography of a Voice</h3>
+            <p class="card-desc">Site-specific audio installation commissioned for the Liverpool Biennial 2022. Visitors navigate a space built entirely from spoken word.</p>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <div class="card-visual visual-photo">
+            <span class="visual-icon">⊡</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Radio Drama</div>
+            <h3 class="card-title">Before the Line Goes Dead</h3>
+            <p class="card-desc">Written for BBC Radio 4. A 60-minute drama set entirely within a single phone call between a father and daughter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p class="footer-name">Gerard Morina</p>
+  <p class="footer-tagline">Available for commissions, residencies, and collaboration</p>
+  <nav class="footer-links">
+    <a href="#" class="footer-link">Contact</a>
+    <a href="#" class="footer-link">Rights &amp; Licensing</a>
+    <a href="#" class="footer-link">Newsletter</a>
+  </nav>
+  <p class="footer-copy">© 2026 Gerard Morina. All rights reserved.</p>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Subtle entrance animation for cards as they enter view
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = `fadeUp 0.6s ${i * 0.05}s both ease`;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.play-card, .track, .writing-item, .other-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
