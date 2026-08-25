@@ -336,124 +336,26 @@
   .award-star { font-size: 0.8rem; }
 
   /* ── SONGS ── */
-  .songs-layout {
+  .spotify-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .spotify-embed {
+    background: var(--bg2);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .spotify-embed iframe {
+    display: block;
+    border: none;
   }
 
   @media (max-width: 700px) {
-    .songs-layout { grid-template-columns: 1fr; }
     .tab-btn { padding: 1.2rem 1rem; font-size: 0.55rem; letter-spacing: 0.2em; }
-  }
-
-  .album-art {
-    aspect-ratio: 1;
-    background: var(--bg3);
-    border: 1px solid rgba(201, 168, 76, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .album-art::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
-  }
-
-  .album-inner {
-    width: 70%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .album-center {
-    width: 30%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 1px solid rgba(201, 168, 76, 0.3);
-  }
-
-  .album-rings {
-    position: absolute;
-    inset: -20%;
-    border-radius: 50%;
-    border: 1px solid rgba(201, 168, 76, 0.08);
-  }
-
-  .album-label {
-    text-align: center;
-    margin-top: 1rem;
-  }
-
-  .album-name {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--cream-dim);
-  }
-
-  .tracklist { list-style: none; }
-
-  .track {
-    display: grid;
-    grid-template-columns: 2rem 1fr auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-    transition: all 0.3s;
-    cursor: default;
-  }
-
-  .track:hover { padding-left: 0.5rem; border-color: rgba(201, 168, 76, 0.2); }
-  .track:hover .track-num { color: var(--gold); }
-  .track:hover .track-title { color: var(--cream); }
-
-  .track-num {
-    font-family: var(--title);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: rgba(201, 168, 76, 0.4);
-    text-align: right;
-    transition: color 0.3s;
-  }
-
-  .track-info { }
-
-  .track-title {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    color: var(--cream-dim);
-    font-style: italic;
-    transition: color 0.3s;
-  }
-
-  .track-from {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: rgba(201, 168, 76, 0.5);
-    margin-top: 0.15rem;
-  }
-
-  .track-dur {
-    font-family: var(--title);
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    color: rgba(201, 168, 76, 0.35);
   }
 
   /* ── WRITINGS ── */
@@ -759,80 +661,15 @@
         <p class="section-intro">Music written, performed and recorded by Gerard Morina.</p>
       </div>
 
-      <div class="songs-layout">
-        <div>
-          <div class="album-art">
-            <div class="album-inner">
-              <div class="album-rings"></div>
-              <div class="album-rings" style="inset: -35%;"></div>
-              <div class="album-center"></div>
-            </div>
-          </div>
-          <div class="album-label">
-            <p class="album-name">Selected Works, 2014–2024</p>
-          </div>
-        </div>
-
-        <div>
-          <ul class="tracklist">
-            <li class="track">
-              <span class="track-num">01</span>
-              <div class="track-info">
-                <div class="track-title">Tender Machinery</div>
-                <div class="track-from">from Salt Flat (2017)</div>
-              </div>
-              <span class="track-dur">4:12</span>
-            </li>
-            <li class="track">
-              <span class="track-num">02</span>
-              <div class="track-info">
-                <div class="track-title">What the Lake Knows</div>
-                <div class="track-from">Original (2022)</div>
-              </div>
-              <span class="track-dur">3:47</span>
-            </li>
-            <li class="track">
-              <span class="track-num">03</span>
-              <div class="track-info">
-                <div class="track-title">The Cartographer's Wife</div>
-                <div class="track-from">from The Cartography of Loss (2023)</div>
-              </div>
-              <span class="track-dur">5:33</span>
-            </li>
-            <li class="track">
-              <span class="track-num">04</span>
-              <div class="track-info">
-                <div class="track-title">Rooms</div>
-                <div class="track-from">from All the Rooms… (2019)</div>
-              </div>
-              <span class="track-dur">2:58</span>
-            </li>
-            <li class="track">
-              <span class="track-num">05</span>
-              <div class="track-info">
-                <div class="track-title">No Signal</div>
-                <div class="track-from">Film score, Dusk at the Edge (2020)</div>
-              </div>
-              <span class="track-dur">6:10</span>
-            </li>
-            <li class="track">
-              <span class="track-num">06</span>
-              <div class="track-info">
-                <div class="track-title">Meridian (Reprise)</div>
-                <div class="track-from">from Meridian (2021)</div>
-              </div>
-              <span class="track-dur">3:22</span>
-            </li>
-            <li class="track">
-              <span class="track-num">07</span>
-              <div class="track-info">
-                <div class="track-title">Half-Light (Instrumental)</div>
-                <div class="track-from">Original / Live (2014)</div>
-              </div>
-              <span class="track-dur">7:04</span>
-            </li>
-          </ul>
-        </div>
+      <div class="spotify-grid">
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0w4KDxkP3X8v2Y3hfPAIOy?utm_source=generator&theme=0&si=c3f345ad70714f66" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3acHmTSlJQSwe0igEMUtX7?utm_source=generator&si=c933c68fe7d94a73" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4rGDgsmZLXXp5QCHAIyyUe?utm_source=generator&si=f63f4c6561584ada" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6wtkT0g9oK5Yknm1n6ujAn?utm_source=generator&si=63f69bb4214249ef" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/61MTRTW96OWsDY8ApJww2x?utm_source=generator&si=2dba9f279bd7402b" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6zHCtHU5dhY2UCeQzfiZWL?utm_source=generator&si=562514926d874b33" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/18btgvdRwTabq4aLRaIWyW?utm_source=generator&si=1055bb5a8a274c8f" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+        <div class="spotify-embed"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1rRaowGVSJHVYJSv8F88VU?utm_source=generator&si=8a51535e44414034" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
       </div>
     </section>
 
@@ -1018,7 +855,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.play-card, .track, .writing-item, .other-card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.play-card, .spotify-embed, .writing-item, .other-card').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
