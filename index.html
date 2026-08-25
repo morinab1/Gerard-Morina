@@ -470,6 +470,67 @@
     line-height: 1.7;
   }
 
+  /* ── CONTACT ── */
+  .contact-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5rem 2rem 2rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-row label {
+    font-family: var(--title);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .form-row input,
+  .form-row textarea {
+    background: var(--bg2);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--cream);
+    font-family: var(--serif);
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    resize: vertical;
+    transition: border-color 0.3s;
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .form-submit {
+    align-self: center;
+    font-family: var(--title);
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--gold);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .form-submit:hover { background: var(--gold-light); }
+
   /* ── FOOTER / CONTACT ── */
   .site-footer {
     border-top: 1px solid rgba(201, 168, 76, 0.15);
@@ -770,12 +831,38 @@
   </div>
 </main>
 
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">For commissions, residencies, licensing, or collaboration inquiries.</p>
+  </div>
+
+  <form class="contact-form" action="https://formspree.io/f/xljrylgz" method="POST">
+    <div class="form-row">
+      <label for="contact-name">Name</label>
+      <input type="text" id="contact-name" name="name" required>
+    </div>
+    <div class="form-row">
+      <label for="contact-email">Email</label>
+      <input type="email" id="contact-email" name="email" required>
+    </div>
+    <div class="form-row">
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" name="message" rows="6" required></textarea>
+    </div>
+    <button type="submit" class="form-submit">Send Message</button>
+  </form>
+</section>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <p class="footer-name">Gerard Morina</p>
   <p class="footer-tagline">Available for commissions, residencies, and collaboration</p>
   <nav class="footer-links">
-    <a href="#" class="footer-link">Contact</a>
+    <a href="#contact" class="footer-link">Contact</a>
     <a href="#" class="footer-link">Rights &amp; Licensing</a>
     <a href="#" class="footer-link">Newsletter</a>
   </nav>
