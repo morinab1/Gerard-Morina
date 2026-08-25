@@ -119,38 +119,6 @@
     animation: fadeUp 1s 1s forwards;
   }
 
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.5s forwards;
-  }
-
-  .scroll-indicator span {
-    font-family: var(--title);
-    font-size: 0.55rem;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.2); }
-  }
-
   /* ── NAV TABS ── */
   .tab-nav {
     position: sticky;
@@ -573,10 +541,6 @@
   </h1>
   <div class="hero-divider"></div>
   <p class="hero-subtitle" style="opacity:0;animation:fadeUp 1s 1s forwards;">All works created and imagined by Gerard Morina. AI was not used for the making of any these works. Please see contact section to get in touch.</p>
-  <div class="scroll-indicator">
-    <span>Works</span>
-    <div class="scroll-line"></div>
-  </div>
 </header>
 
 <!-- STICKY TAB NAV -->
