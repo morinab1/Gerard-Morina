@@ -950,8 +950,7 @@
   <p class="footer-tagline">Available for commissions, residencies, and collaboration</p>
   <nav class="footer-links">
     <a href="#" class="footer-link" onclick="event.preventDefault(); document.getElementById('modal-contact').style.display='flex'">Contact</a>
-    <a href="#" class="footer-link">Rights &amp; Licensing</a>
-    <a href="#" class="footer-link">Newsletter</a>
+    <a href="#" class="footer-link" onclick="event.preventDefault(); document.getElementById('modal-rights').style.display='flex'">Rights &amp; Licensing</a>
   </nav>
   <p class="footer-copy">© 2026 Gerard Morina. All rights reserved.</p>
 </footer>
@@ -1405,6 +1404,40 @@
   </div>
 </div>
 
+<!-- RIGHTS & LICENSING MODAL -->
+<div id="modal-rights" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.88); align-items:center; justify-content:center; padding:1.5rem;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#161411; border:1px solid rgba(201,168,76,0.25); max-width:520px; width:100%; position:relative;">
+    <div style="padding:1.5rem 2rem 1rem; border-bottom:1px solid rgba(201,168,76,0.15); display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <p style="font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.35em; color:var(--gold); margin-bottom:0.3rem;">INQUIRIES</p>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif; font-size:1.6rem; font-weight:300; font-style:italic; color:var(--cream); line-height:1.1;">Rights &amp; Licensing</h2>
+      </div>
+      <button onclick="document.getElementById('modal-rights').style.display='none'" style="background:none; border:1px solid rgba(201,168,76,0.3); color:var(--gold); font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; padding:0.5rem 0.9rem; cursor:pointer; flex-shrink:0; margin-left:1rem;">✕ CLOSE</button>
+    </div>
+    <div style="padding:2rem 2.5rem 2.5rem;">
+      <p style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:1.05rem; color:var(--cream-dim); line-height:1.8; margin-bottom:2rem;">For inquiries regarding rights, licensing, or permissions for any of Gerard&rsquo;s works, please get in touch below.</p>
+      <form onsubmit="handleRights(event)" style="display:flex; flex-direction:column; gap:1rem;">
+        <div>
+          <label style="font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.25em; color:rgba(201,168,76,0.6); display:block; margin-bottom:0.4rem;">YOUR NAME</label>
+          <input type="text" id="rights-name" required placeholder="Your name" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.2); padding:0.75rem 1rem; color:var(--cream); font-family:'Lato',sans-serif; font-size:0.9rem; font-weight:300; outline:none;" onfocus="this.style.borderColor='rgba(201,168,76,0.6)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'"/>
+        </div>
+        <div>
+          <label style="font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.25em; color:rgba(201,168,76,0.6); display:block; margin-bottom:0.4rem;">YOUR EMAIL</label>
+          <input type="email" id="rights-email" required placeholder="your@email.com" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.2); padding:0.75rem 1rem; color:var(--cream); font-family:'Lato',sans-serif; font-size:0.9rem; font-weight:300; outline:none;" onfocus="this.style.borderColor='rgba(201,168,76,0.6)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'"/>
+        </div>
+        <div>
+          <label style="font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.25em; color:rgba(201,168,76,0.6); display:block; margin-bottom:0.4rem;">MESSAGE</label>
+          <textarea id="rights-message" required placeholder="Your message..." rows="5" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.2); padding:0.75rem 1rem; color:var(--cream); font-family:'Lato',sans-serif; font-size:0.9rem; font-weight:300; outline:none; resize:vertical;" onfocus="this.style.borderColor='rgba(201,168,76,0.6)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'"></textarea>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-top:0.5rem; gap:1rem; flex-wrap:wrap;">
+          <button type="submit" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:#0d0c0a; background:var(--gold); border:none; padding:0.9rem 2rem; cursor:pointer; transition:background 0.3s; white-space:nowrap;" onmouseenter="this.style.background='#e8c97a'" onmouseleave="this.style.background='var(--gold)'">SEND MESSAGE</button>
+        </div>
+        <div id="rights-success" style="display:none; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(201,168,76,0.8); text-align:center; padding:0.8rem; border:1px solid rgba(201,168,76,0.2);">Thank you — Gerard will be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- CONTACT MODAL -->
 <div id="modal-contact" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.88); align-items:center; justify-content:center; padding:1.5rem;" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#161411; border:1px solid rgba(201,168,76,0.25); max-width:520px; width:100%; position:relative;">
@@ -1450,6 +1483,24 @@ function handleContact(e) {
     document.getElementById('contact-name').value = '';
     document.getElementById('contact-email').value = '';
     document.getElementById('contact-message').value = '';
+  }, 2500);
+}
+
+function handleRights(e) {
+  e.preventDefault();
+  const name    = document.getElementById('rights-name').value;
+  const email   = document.getElementById('rights-email').value;
+  const message = document.getElementById('rights-message').value;
+  const subject = encodeURIComponent('Rights and Licensing');
+  const body    = encodeURIComponent('From: ' + name + ' <' + email + '>\n\n' + message);
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+  document.getElementById('rights-success').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('modal-rights').style.display = 'none';
+    document.getElementById('rights-success').style.display = 'none';
+    document.getElementById('rights-name').value = '';
+    document.getElementById('rights-email').value = '';
+    document.getElementById('rights-message').value = '';
   }, 2500);
 }
 </script>
