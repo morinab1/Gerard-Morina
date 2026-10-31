@@ -1519,10 +1519,11 @@ function openContact(subject, closeModalId) {
 }
 
 async function postToFormspree(data) {
+  const body = new URLSearchParams(data).toString();
   const res = await fetch('https://formspree.io/f/xljrylgz', {
     method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body
   });
   return res.ok;
 }
