@@ -983,7 +983,7 @@
   <p class="footer-name">Gerard Morina</p>
   <p class="footer-tagline">Available for commissions, residencies, and collaboration</p>
   <nav class="footer-links">
-    <a href="#" class="footer-link" onclick="event.preventDefault(); document.getElementById('modal-contact').style.display='flex'">Contact</a>
+    <a href="#" class="footer-link" onclick="event.preventDefault(); openContact('General Inquiry')">Contact</a>
     <a href="#" class="footer-link" onclick="event.preventDefault(); document.getElementById('modal-rights').style.display='flex'">Rights &amp; Licensing</a>
   </nav>
   <p class="footer-copy">© 2026 Gerard Morina. All rights reserved.</p>
@@ -1097,7 +1097,7 @@
 
       <!-- Contact button -->
       <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.8rem; margin-top:1rem; display:flex; justify-content:center;">
-        <button onclick="document.getElementById('modal-train').style.display='none'; document.getElementById('modal-contact').style.display='flex';" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
+        <button onclick="openContact('The (not so) Great Train Robbery - Reading', 'modal-train')" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
       </div>
     </div>
   </div>
@@ -1238,7 +1238,7 @@
 
       <!-- Contact button -->
       <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.8rem; margin-top:1rem; display:flex; justify-content:center;">
-        <button onclick="document.getElementById('modal-messiah').style.display='none'; document.getElementById('modal-contact').style.display='flex';" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
+        <button onclick="openContact('The Reluctant Messiah - Reading', 'modal-messiah')" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
       </div>
     </div>
   </div>
@@ -1373,7 +1373,7 @@
 
       <!-- Contact button -->
       <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.8rem; margin-top:1rem; display:flex; justify-content:center;">
-        <button onclick="document.getElementById('modal-amg').style.display='none'; document.getElementById('modal-contact').style.display='flex';" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
+        <button onclick="openContact('General Inquiry', 'modal-amg')" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
       </div>
     </div>
   </div>
@@ -1432,7 +1432,7 @@
       <p style="font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.25em; color:var(--gold); text-align:center; margin:2rem 0 1rem;">✦ THE END ✦</p>
 
       <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.8rem; margin-top:1rem; display:flex; justify-content:center;">
-        <button onclick="document.getElementById('modal-ftb').style.display='none'; document.getElementById('modal-contact').style.display='flex';" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
+        <button onclick="openContact('General Inquiry', 'modal-ftb')" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); background:none; border:1px solid rgba(201,168,76,0.4); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s;" onmouseenter="this.style.borderColor='rgba(201,168,76,0.9)'; this.style.background='rgba(201,168,76,0.06)'" onmouseleave="this.style.borderColor='rgba(201,168,76,0.4)'; this.style.background='none'">If you would like to read more, please contact the author</button>
       </div>
     </div>
   </div>
@@ -1510,6 +1510,14 @@
 </div>
 
 <script>
+let _contactSubject = 'General Inquiry';
+
+function openContact(subject, closeModalId) {
+  _contactSubject = subject || 'General Inquiry';
+  if (closeModalId) document.getElementById(closeModalId).style.display = 'none';
+  document.getElementById('modal-contact').style.display = 'flex';
+}
+
 async function postToFormspree(data) {
   const res = await fetch('https://formspree.io/f/xljrylgz', {
     method: 'POST',
@@ -1537,9 +1545,10 @@ async function handleContact(e) {
   btn.textContent = 'SENDING…';
   if (errorEl) errorEl.style.display = 'none';
   const ok = await postToFormspree({
-    name:    document.getElementById('contact-name').value,
-    email:   document.getElementById('contact-email').value,
-    message: document.getElementById('contact-message').value
+    _subject: _contactSubject,
+    name:     document.getElementById('contact-name').value,
+    email:    document.getElementById('contact-email').value,
+    message:  document.getElementById('contact-message').value
   });
   btn.disabled = false;
   btn.textContent = 'SEND MESSAGE';
