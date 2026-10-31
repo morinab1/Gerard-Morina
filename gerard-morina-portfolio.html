@@ -345,7 +345,35 @@
 
   @media (max-width: 700px) {
     .songs-layout { grid-template-columns: 1fr; }
-    .tab-btn { padding: 1.2rem 1rem; font-size: 0.55rem; letter-spacing: 0.2em; }
+    .tab-btn { display: none; }
+    .tab-nav { padding: 0.6rem 1rem; justify-content: stretch; }
+    .tab-nav-select {
+      display: block;
+      width: 100%;
+      font-family: var(--title);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(13,12,10,0.98);
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+    }
+    .tab-nav-select option {
+      background: #161411;
+      color: var(--cream);
+      letter-spacing: 0.1em;
+    }
+  }
+  @media (min-width: 701px) {
+    .tab-nav-select { display: none; }
   }
 
   .album-art {
@@ -790,6 +818,13 @@
   <button class="tab-btn" role="tab" data-target="short-stories" aria-selected="false">Short Stories/Poems</button>
   <button class="tab-btn" role="tab" data-target="plays" aria-selected="false">Plays/One Acts</button>
   <button class="tab-btn" role="tab" data-target="songs" aria-selected="false">Songs</button>
+  <select class="tab-nav-select" aria-label="Select section" onchange="switchTabMobile(this.value)">
+    <option value="biography">Biography</option>
+    <option value="writings">Novels / Novellas</option>
+    <option value="short-stories">Short Stories / Poems</option>
+    <option value="plays">Plays / One Acts</option>
+    <option value="songs">Songs</option>
+  </select>
 </nav>
 
 <!-- CONTENT -->
@@ -1473,6 +1508,15 @@
 </div>
 
 <script>
+function switchTabMobile(target) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  const panel = document.getElementById(target);
+  if (panel) panel.classList.add('active');
+  const btn = document.querySelector('.tab-btn[data-target="' + target + '"]');
+  if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
+}
+
 function handleContact(e) {
   e.preventDefault();
   document.getElementById('contact-success').style.display = 'block';
