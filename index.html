@@ -1467,6 +1467,7 @@
           <button type="submit" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:#0d0c0a; background:var(--gold); border:none; padding:0.9rem 2rem; cursor:pointer; transition:background 0.3s; white-space:nowrap;" onmouseenter="this.style.background='#e8c97a'" onmouseleave="this.style.background='var(--gold)'">SEND MESSAGE</button>
         </div>
         <div id="rights-success" style="display:none; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(201,168,76,0.8); text-align:center; padding:0.8rem; border:1px solid rgba(201,168,76,0.2);">Thank you — Gerard will be in touch soon.</div>
+        <div id="rights-error" style="display:none; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(220,80,80,0.85); text-align:center; padding:0.8rem; border:1px solid rgba(220,80,80,0.25);">Something went wrong — please try again.</div>
       </form>
     </div>
   </div>
@@ -1502,12 +1503,22 @@
           <button type="submit" style="font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.25em; color:#0d0c0a; background:var(--gold); border:none; padding:0.9rem 2rem; cursor:pointer; transition:background 0.3s; white-space:nowrap;" onmouseenter="this.style.background='#e8c97a'" onmouseleave="this.style.background='var(--gold)'">SEND MESSAGE</button>
         </div>
         <div id="contact-success" style="display:none; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(201,168,76,0.8); text-align:center; padding:0.8rem; border:1px solid rgba(201,168,76,0.2);">Thank you — Gerard will be in touch soon.</div>
+        <div id="contact-error" style="display:none; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(220,80,80,0.85); text-align:center; padding:0.8rem; border:1px solid rgba(220,80,80,0.25);">Something went wrong — please try again.</div>
       </form>
     </div>
   </div>
 </div>
 
 <script>
+async function postToFormspree(data) {
+  const res = await fetch('https://formspree.io/f/xljrylgz', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  return res.ok;
+}
+
 function switchTabMobile(target) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
@@ -1517,34 +1528,63 @@ function switchTabMobile(target) {
   if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
 }
 
-function handleContact(e) {
+async function handleContact(e) {
   e.preventDefault();
-  document.getElementById('contact-success').style.display = 'block';
-  setTimeout(() => {
-    document.getElementById('modal-contact').style.display = 'none';
-    document.getElementById('contact-success').style.display = 'none';
-    document.getElementById('contact-name').value = '';
-    document.getElementById('contact-email').value = '';
-    document.getElementById('contact-message').value = '';
-  }, 2500);
+  const btn = e.target.querySelector('button[type="submit"]');
+  const successEl = document.getElementById('contact-success');
+  const errorEl = document.getElementById('contact-error');
+  btn.disabled = true;
+  btn.textContent = 'SENDING…';
+  if (errorEl) errorEl.style.display = 'none';
+  const ok = await postToFormspree({
+    name:    document.getElementById('contact-name').value,
+    email:   document.getElementById('contact-email').value,
+    message: document.getElementById('contact-message').value
+  });
+  btn.disabled = false;
+  btn.textContent = 'SEND MESSAGE';
+  if (ok) {
+    successEl.style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('modal-contact').style.display = 'none';
+      successEl.style.display = 'none';
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-message').value = '';
+    }, 2500);
+  } else {
+    if (errorEl) errorEl.style.display = 'block';
+  }
 }
 
-function handleRights(e) {
+async function handleRights(e) {
   e.preventDefault();
-  const name    = document.getElementById('rights-name').value;
-  const email   = document.getElementById('rights-email').value;
-  const message = document.getElementById('rights-message').value;
-  const subject = encodeURIComponent('Rights and Licensing');
-  const body    = encodeURIComponent('From: ' + name + ' <' + email + '>\n\n' + message);
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-  document.getElementById('rights-success').style.display = 'block';
-  setTimeout(() => {
-    document.getElementById('modal-rights').style.display = 'none';
-    document.getElementById('rights-success').style.display = 'none';
-    document.getElementById('rights-name').value = '';
-    document.getElementById('rights-email').value = '';
-    document.getElementById('rights-message').value = '';
-  }, 2500);
+  const btn = e.target.querySelector('button[type="submit"]');
+  const successEl = document.getElementById('rights-success');
+  const errorEl = document.getElementById('rights-error');
+  btn.disabled = true;
+  btn.textContent = 'SENDING…';
+  if (errorEl) errorEl.style.display = 'none';
+  const ok = await postToFormspree({
+    _subject: 'Rights and Licensing',
+    name:     document.getElementById('rights-name').value,
+    email:    document.getElementById('rights-email').value,
+    message:  document.getElementById('rights-message').value
+  });
+  btn.disabled = false;
+  btn.textContent = 'SEND MESSAGE';
+  if (ok) {
+    successEl.style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('modal-rights').style.display = 'none';
+      successEl.style.display = 'none';
+      document.getElementById('rights-name').value = '';
+      document.getElementById('rights-email').value = '';
+      document.getElementById('rights-message').value = '';
+    }, 2500);
+  } else {
+    if (errorEl) errorEl.style.display = 'block';
+  }
 }
 </script>
 
